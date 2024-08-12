@@ -1,0 +1,69 @@
+官方
+
+[B - Annoying String Problem](/contests/arc181/tasks/arc181_b) Editorial by [evima](/users/evima)
+-------------------------------------------------------------------------------------------------
+
+* * *
+
+In most cases, the length of $f(S,T,X)$ and $f(S,T,Y)$ being equal reveals the length of $T$. Let’s consider under what conditions $S$ and $T$ satisfy $f(S,T,X)=f(S,T,Y)$ when the lengths of $S$ and $T$ are known.
+
+Example
+-------
+
+For instance, when $|S|=6$ and $|T|=4$, let’s consider when $S+T+T+S+T+S=T+T+T+S+T+T+T$ holds. By comparing the beginning, it is necessary that $T$ is a prefix of $S$ and that $S$ can be expressed as $S=T+S'$ using $S'$ with $|S'|=2$. Replacing this in the equation, we get:
+
+$T+S'+T+T+T+S'+T+T+S' = T+T+T+T+S'+T+T+T$
+
+  $\iff S'+T+T+T+S'+T+T+S' = T+T+T+S'+T+T+T$.
+
+Next, $S'$ must be a prefix of $T$, and $T$ can be expressed as $T=S'+T'$ using $T'$ with $|T'|=2$. Replacing this in the equation, we get:
+
+$S'+ ($ expression in terms of $S'$ and $T'$ $) = T' + ($ expression in terms of $S'$ and $T'$ $)$.
+
+In this equation, $S'=T'$ is necessary and sufficient since $|S'|$ and $|T'|$ are equal. Representing $S$ and $T$ using $S'=T'=U$, we get $S=U+U+U$ and $T=U+U$. Conversely, if $S$ and $T$ can be expressed in this way, the concatenation of $S$ and $T$ will be a repetition of $U$, making the equation obviously hold. Therefore,
+	
+	-   $|S|=6, |T|=4$, and $S+T+T+S+T+S=T+T+T+S+T+T+T$   $\iff$ $S$ and $T$ can be expressed as $S=U+U+U$ and $T=U+U$ using a string $U$ of length $2$.
+	
+	Observation
+	-----------
+	
+	Generalizing the above process, we find that:
+	
+	-   If the equation is of a trivial form such as $A+A+B=A+A+B$, it holds for any $A$ and $B$.
+		-   If the lengths of the two strings $A$ and $B$ used in the equation are different (let’s assume $|A| &lt; |B|$), the equation takes the form $A+(\dots)=B+(\dots)$, and it is necessary that $B=A+B'$, reducing the problem to the same form concerning $A$ and $B'$.
+		-   If the lengths of the two strings $A$ and $B$ used in the equation are equal, $A=B$ is necessary and sufficient.
+		
+		Particularly, the second reduction is repeated until it eventually reaches the first or third state.
+		
+		Considering the final state reached by repeated reductions, the second reduction takes the following form:
+		
+		-   $A+A+(\dots) = B+(\dots) \iff A + A + (\dots) = A + B' + (\dots) \iff A + (\dots) = B' + (\dots)$
+		-   $A+B+(\dots) = B+(\dots) \iff A + A + B'+ (\dots) = A + B' + (\dots) \iff A + B' + (\dots) = B' + (\dots)$
+		
+		Thus, if the initial equation is not of the trivial form, the equation does not reduce to the first state during the second reduction, and it always reaches the third state.
+			
+			Tracing back the replacements such as $B=A+B'$ from the third state, it is necessary and sufficient that $A$ and $B$ are repetitions of a common string $C$ of length $L$, where $L$ is the length of the strings $A$ and $B$ in the third state.
+			
+			Therefore, once $L$ is determined, the condition can be easily checked. Considering the length change during the second reduction, it can be seen as $(n,m)\rightarrow (n,m-n)$ repeated until $n=m$. This is exactly the Euclidean algorithm, so $L=\mathrm{gcd}(n,m)$.
+
+Solution
+--------
+
+First, consider the case where the number of `1`s in $X$ and $Y$ is equal. If the number of `0`s is also equal, setting $T=S$ clearly satisfies $f(S,T,X)=f(S,T,Y)$, so the answer is `Yes`. Otherwise, the lengths of $f(S,T,X)$ and $f(S,T,Y)$ cannot be equal, so the answer is `No`.
+
+If the number of `1`s in $X$ and $Y$ is not equal, we have $X\neq Y$, and $|f(S,T,X)|=|f(S,T,Y)|$ yields a linear equation in terms of $|T|$, allowing us to find $|T|$ (if this is not an integer or is negative, the answer is `No`).
+
+From the above observation, when $X\neq Y$,
+
+★ $f(S,T,X)=f(S,T,Y) \iff S$ and $T$ are repetitions of a string $U$ of length $\mathrm{gcd}(|S|,|T|)$.
+
+Therefore, a $T$ that satisfies the condition exists if $S$ has a period of $\mathrm{gcd}(|S|,|T|)$. This can be checked in $O(|S|)$ time by verifying if the $i$\-th character of $S$ is equal to the $(i+\mathrm{gcd}(|S|,|T|))$\-th character.
+	
+	Formal proof of ★:
+	
+	Prove by induction on $||S|-|T||$. It is clear when $|S|=|T|$.
+	
+	Assume $|S| &lt; |T|$ without loss of generality. Also, since $X \neq Y$, by removing common prefixes as needed, we can assume the first characters of $X$ and $Y$ are `0` and `1`, respectively. Then, it is necessary that $S$ is a prefix of $T$, and there exists $T'$ such that $T=S+T'$. For the equation to hold, $f(S,T',X')=f(S,T',Y')$ is necessary, where $X'$ and $Y'$ are strings obtained by replacing `1` with `01` simultaneously in $X$ and $Y$, respectively. By considering the second character of $X'$, it can be seen that $X' \neq Y'$, and by the induction hypothesis, $S$ and $T'$ are repetitions of a string $U$ of length $\mathrm{gcd}(|S|,|T|-|S|)=\mathrm{gcd}(|S|,|T|)$. Combining this with $T=S+T'$, it can be seen that $T$ is also a repetition of $U$. Thus, necessity is shown. Sufficiency is obvious.
+
+posted: a day ago  
+last update: a day ago

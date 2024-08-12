@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"name": "Atcoder",
+			"path": "Atcoder"
+		},
+		{
+			"name": "Codeforces",
+			"path": "Codeforces"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp",
+			"bitset": "cpp",
+			"*.tcc": "cpp",
+			"deque": "cpp",
+			"string": "cpp",
+			"vector": "cpp"
+		}
+	}
+}

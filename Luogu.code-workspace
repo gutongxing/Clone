@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"name": "洛谷题库",
+			"path": "F:/Compitation/Luogu"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp",
+			"bitset": "cpp",
+			"*.tcc": "cpp",
+			"deque": "cpp",
+			"string": "cpp",
+			"vector": "cpp",
+			"ostream": "cpp",
+			"array": "cpp",
+			"tuple": "cpp",
+			"utility": "cpp"
+		}
+	}
+}

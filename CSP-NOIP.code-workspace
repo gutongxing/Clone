@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"name": "洛谷题库 - 07月订正",
+			"path": "Luogu/2024-7 月订订"
+		}
+		{
+			"name": "模拟原题",
+			"path": "CSP-NOIP模拟"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iostream": "cpp",
+			"bitset": "cpp",
+			"*.tcc": "cpp",
+			"deque": "cpp",
+			"string": "cpp",
+			"vector": "cpp",
+			"ostream": "cpp",
+			"array": "cpp",
+			"tuple": "cpp",
+			"utility": "cpp"
+		}
+	}
+}

@@ -1,0 +1,5 @@
+T = int(input())
+for i in range(T):
+    n = int(input())
+    k = int(input())
+    print(math.cell(n/k))
